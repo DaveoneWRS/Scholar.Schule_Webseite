@@ -1,0 +1,115 @@
+/* scholar.schule – Custom Styles */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hero dot-grid background */
+.hero-bg {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Sticky nav transition */
+header {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Credential display boxes */
+.credential-box {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+}
+
+/* Product accent borders */
+.scholar-accent {
+  border-left: 4px solid #16A34A;
+}
+
+.planora-accent {
+  border-left: 4px solid #7C3AED;
+}
+
+/* Badge / pill */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 9999px;
+}
+
+/* Feature card hover lift */
+.feature-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+}
+
+/* Pricing card recommended ring */
+.pricing-recommended {
+  box-shadow: 0 0 0 2px #2563EB, 0 20px 40px rgba(37, 99, 235, 0.15);
+}
+
+/* FAQ accordion chevron rotation */
+.chevron-open {
+  transform: rotate(180deg);
+}
+.chevron-closed {
+  transform: rotate(0deg);
+}
+svg.chevron {
+  transition: transform 0.25s ease;
+}
+
+/* Quick-link resource cards */
+.resource-card {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.resource-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 3px;
+}
+
+/* Form focus styles */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Success/error banners */
+.form-banner {
+  animation: slideDown 0.3s ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Print */
+@media print {
+  header, footer, .no-print {
+    display: none !important;
+  }
+}

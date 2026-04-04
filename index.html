@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Scholar und Planora – moderne Schulverwaltungssoftware und Arbeitsmanagement für Schulen in Deutschland. DSGVO-konform, Made in Germany.">
+  <meta name="keywords" content="Schulverwaltung, Schulverwaltungssoftware, Schulsoftware, Deutschland, DSGVO, Scholar, Planora, Dashtec">
+  <meta property="og:title" content="scholar.schule – Moderne Schulsoftware">
+  <meta property="og:description" content="Scholar und Planora – die All-in-One Lösung für moderne Schulen in Deutschland.">
+  <meta property="og:url" content="https://scholar.schule">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://scholar.schule">
+  <title>scholar.schule – Moderne Schulsoftware für Deutschland</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Nunito', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              500: '#3B82F6',
+              600: '#2563EB',
+              700: '#1D4ED8',
+              800: '#1E293B',
+              900: '#0F172A',
+            },
+            scholar: {
+              50:  '#F0FDF4',
+              100: '#DCFCE7',
+              200: '#BBF7D0',
+              400: '#22C55E',
+              500: '#16A34A',
+              600: '#15803D',
+            },
+            planora: {
+              50:  '#F5F3FF',
+              100: '#EDE9FE',
+              200: '#DDD6FE',
+              400: '#A78BFA',
+              500: '#8B5CF6',
+              600: '#7C3AED',
+            },
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Alpine.js -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.1/cdn.min.js"></script>
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="font-sans text-slate-900 antialiased" x-data="{ cookieOk: localStorage.getItem('cookieOk') }">
+
+<!-- ═══════════════════════════════════════════════
+     STICKY NAVIGATION
+═══════════════════════════════════════════════ -->
+<header
+  x-data="{ mobileOpen: false, scrolled: false }"
+  @scroll.window="scrolled = window.scrollY > 50"
+  :class="scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100' : 'bg-transparent'"
+  class="fixed top-0 w-full z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo / Wordmark -->
+      <a href="#" class="flex items-center gap-2 group">
+        <span class="text-xl font-display font-900 tracking-tight"
+              :class="scrolled ? 'text-slate-900' : 'text-white'">
+          <span class="text-brand-600">scholar</span><span :class="scrolled ? 'text-slate-400' : 'text-slate-300'">.schule</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1">
+        <a href="#scholar"    data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+           :class="scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-200 hover:text-white hover:bg-white/10'">Scholar</a>
+        <a href="#planora"    data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+           :class="scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-200 hover:text-white hover:bg-white/10'">Planora</a>
+        <a href="#referenzen" data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+           :class="scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-200 hover:text-white hover:bg-white/10'">Referenzen</a>
+        <a href="#preise"     data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+           :class="scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-200 hover:text-white hover:bg-white/10'">Preise</a>
+        <a href="#faq"        data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+           :class="scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-200 hover:text-white hover:bg-white/10'">FAQ</a>
+        <a href="#kontakt"    data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+           :class="scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-200 hover:text-white hover:bg-white/10'">Kontakt</a>
+      </nav>
+
+      <!-- CTA Buttons -->
+      <div class="hidden lg:flex items-center gap-3">
+        <a href="https://crm.scholar.schule" target="_blank" rel="noopener"
+           class="px-4 py-2 rounded-lg text-sm font-medium border transition-colors"
+           :class="scrolled ? 'border-slate-300 text-slate-700 hover:bg-slate-50' : 'border-white/30 text-white hover:bg-white/10'">
+          Kundenzugang
+        </a>
+        <a href="#kontakt"
+           class="px-4 py-2 rounded-lg text-sm font-semibold bg-brand-600 text-white hover:bg-brand-700 transition-colors shadow-md">
+          Demo anfordern
+        </a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button @click="mobileOpen = !mobileOpen" class="lg:hidden p-2 rounded-lg"
+              :class="scrolled ? 'text-slate-600' : 'text-white'">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path x-show="!mobileOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          <path x-show="mobileOpen"  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div x-show="mobileOpen" x-transition class="lg:hidden bg-white border-t border-gray-100 shadow-lg">
+    <div class="px-4 py-4 space-y-1">
+      <a href="#scholar"    @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Scholar</a>
+      <a href="#planora"    @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Planora</a>
+      <a href="#referenzen" @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Referenzen</a>
+      <a href="#preise"     @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Preise</a>
+      <a href="#faq"        @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">FAQ</a>
+      <a href="#kontakt"    @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Kontakt</a>
+      <div class="pt-2 border-t border-gray-100 flex gap-2">
+        <a href="https://crm.scholar.schule" target="_blank" rel="noopener"
+           class="flex-1 text-center px-3 py-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-700">Kundenzugang</a>
+        <a href="#kontakt" @click="mobileOpen=false"
+           class="flex-1 text-center px-3 py-2 rounded-lg bg-brand-600 text-white text-sm font-semibold">Demo anfordern</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section id="hero" class="hero-bg relative min-h-screen flex items-center bg-gradient-to-br from-brand-900 via-brand-800 to-slate-900 pt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 w-full">
+    <div class="max-w-3xl">
+
+      <div class="flex gap-3 mb-8">
+        <span class="badge bg-scholar-500/20 text-scholar-400">Scholar</span>
+        <span class="badge bg-planora-600/20 text-planora-400">Planora</span>
+      </div>
+
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-900 text-white leading-tight mb-6">
+        Schulverwaltung und<br>
+        Teamarbeit —<br>
+        <span class="text-brand-500">neu gedacht.</span>
+      </h1>
+
+      <p class="text-lg sm:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed">
+        Scholar und Planora sind die moderne Softwarelösung für Schulen: von der digitalen
+        Schülerverwaltung bis zur teamweiten Arbeitszeiterfassung — alles aus einer Hand,
+        DSGVO-konform und Made in Germany.
+      </p>
+
+      <div class="flex flex-wrap gap-4">
+        <a href="#scholar"
+           class="px-6 py-3 rounded-xl font-semibold border-2 border-scholar-500 text-scholar-400 hover:bg-scholar-500/10 transition-colors">
+          Scholar entdecken
+        </a>
+        <a href="#planora"
+           class="px-6 py-3 rounded-xl font-semibold border-2 border-planora-400 text-planora-400 hover:bg-planora-600/10 transition-colors">
+          Planora entdecken
+        </a>
+        <a href="#kontakt"
+           class="px-6 py-3 rounded-xl font-semibold bg-brand-600 text-white hover:bg-brand-700 transition-colors shadow-lg shadow-brand-600/25">
+          Live-Demo anfordern →
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-500 animate-bounce">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     TRUST BAR
+═══════════════════════════════════════════════ -->
+<section id="vertrauen" class="bg-white border-b border-slate-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex flex-wrap items-center justify-center gap-8 text-slate-500 text-sm font-medium">
+      <span class="text-slate-400 text-xs uppercase tracking-widest">Vertraut von Schulen in Deutschland</span>
+      <div class="h-4 w-px bg-slate-200 hidden sm:block"></div>
+      <span class="font-semibold text-slate-700">Wilhelm-Raabe-Schule</span>
+      <div class="h-4 w-px bg-slate-200 hidden sm:block"></div>
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-scholar-500" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clip-rule="evenodd"/>
+        </svg>
+        <span>DSGVO-konform</span>
+      </div>
+      <div class="h-4 w-px bg-slate-200 hidden sm:block"></div>
+      <div class="flex items-center gap-2">
+        <span>🇩🇪</span>
+        <span>Made in Germany</span>
+      </div>
+      <div class="h-4 w-px bg-slate-200 hidden sm:block"></div>
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-brand-600" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L7.586 10 5.293 7.707a1 1 0 010-1.414zM11 12a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+        </svg>
+        <span>Deutsche Server</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SCHOLAR PRODUKTSEKTION
+═══════════════════════════════════════════════ -->
+<section id="scholar" class="bg-white py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="max-w-2xl mb-16">
+      <span class="badge bg-scholar-100 text-scholar-600 mb-4">Schulverwaltung</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-800 text-slate-900 mb-4 scholar-accent pl-4">
+        Scholar — Die All-in-One Lösung für Ihre Schule
+      </h2>
+      <p class="text-lg text-slate-600 leading-relaxed">
+        Scholar ist das zentrale Verwaltungssystem für den modernen Schulalltag.
+        Von der Schülerakte bis zur Geräteverwaltung — alles digital, sicher und übersichtlich.
+      </p>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
+
+      <!-- Schülerverwaltung -->
+      <div class="feature-card bg-slate-50 rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-scholar-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-scholar-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Schülerverwaltung</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Stammdaten, Klassenzuordnung und Lernfortschritt zentral verwalten.</p>
+      </div>
+
+      <!-- Zeugnisse & Noten -->
+      <div class="feature-card bg-slate-50 rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-scholar-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-scholar-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Zeugnisse &amp; Noten</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Digitale Zeugniserstellung und Notenerfassung direkt im System.</p>
+      </div>
+
+      <!-- Bibliothek -->
+      <div class="feature-card bg-slate-50 rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-scholar-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-scholar-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Bibliotheksverwaltung</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Medienausleihe und -rückgabe einfach und papierlos verwalten.</p>
+      </div>
+
+      <!-- Geräteverwaltung -->
+      <div class="feature-card bg-slate-50 rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-scholar-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-scholar-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Geräteverwaltung</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Inventar und Gerätezuweisung an Schüler und Mitarbeiter digital erfassen.</p>
+      </div>
+
+      <!-- Netzwerkzugang -->
+      <div class="feature-card bg-slate-50 rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-scholar-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-scholar-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Netzwerkzugang</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">RADIUS-basierte WLAN-Zugangskontrolle für Schüler und Lehrkräfte.</p>
+      </div>
+
+      <!-- Finanzverwaltung -->
+      <div class="feature-card bg-slate-50 rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-scholar-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-scholar-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Finanzverwaltung</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Schulmaterialzahlungen und -abrechnungen digital abwickeln.</p>
+      </div>
+
+      <!-- Rollenverwaltung -->
+      <div class="feature-card bg-slate-50 rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-scholar-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-scholar-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Rollenverwaltung</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Fein granulierte Berechtigungen für Lehrer, Admins, Eltern und Schüler.</p>
+      </div>
+
+      <!-- Elternportal -->
+      <div class="feature-card bg-slate-50 rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-scholar-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-scholar-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Elternkommunikation</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Digitales Elternportal für Abmeldungen, Nachrichten und Lernmaterial-Bestellungen.</p>
+      </div>
+
+    </div>
+
+    <!-- Demo Box -->
+    <div class="bg-scholar-50 border border-scholar-200 rounded-2xl p-8 max-w-2xl">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 bg-scholar-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <h3 class="font-semibold text-slate-900 text-lg mb-1">Scholar Live-Demo</h3>
+          <p class="text-slate-600 text-sm mb-4">Testen Sie Scholar kostenlos und unverbindlich — keine Registrierung nötig.</p>
+          <div class="space-y-2 text-sm mb-5">
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="text-slate-500 w-16 flex-shrink-0">URL</span>
+              <span class="credential-box text-slate-800">demo.scholar.schule</span>
+            </div>
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="text-slate-500 w-16 flex-shrink-0">E-Mail</span>
+              <span class="credential-box text-slate-800">demo@demo.demo</span>
+              <button onclick="copyToClipboard('demo@demo.demo', this)"
+                      class="text-xs text-scholar-600 hover:text-scholar-700 font-medium border border-scholar-300 rounded px-2 py-0.5 hover:bg-scholar-100 transition-colors">
+                Kopieren
+              </button>
+            </div>
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="text-slate-500 w-16 flex-shrink-0">Passwort</span>
+              <span class="credential-box text-slate-800">demo123456</span>
+              <button onclick="copyToClipboard('demo123456', this)"
+                      class="text-xs text-scholar-600 hover:text-scholar-700 font-medium border border-scholar-300 rounded px-2 py-0.5 hover:bg-scholar-100 transition-colors">
+                Kopieren
+              </button>
+            </div>
+          </div>
+          <a href="https://demo.scholar.schule" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 px-5 py-2.5 bg-scholar-500 text-white rounded-xl font-semibold text-sm hover:bg-scholar-600 transition-colors">
+            Scholar Demo öffnen
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PLANORA PRODUKTSEKTION
+═══════════════════════════════════════════════ -->
+<section id="planora" class="bg-slate-50 py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="max-w-2xl mb-16">
+      <span class="badge bg-planora-100 text-planora-600 mb-4">Arbeitsmanagement</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-800 text-slate-900 mb-4 planora-accent pl-4">
+        Planora — Modernes Aufgaben- und Zeitmanagement
+      </h2>
+      <p class="text-lg text-slate-600 leading-relaxed">
+        Planora ist die moderne Arbeitsmanagement-Plattform für Schulteams.
+        Aufgaben, Projekte, Zeiten und Ankündigungen — alles an einem Ort.
+      </p>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
+
+      <!-- Dashboard -->
+      <div class="feature-card bg-white rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-planora-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-planora-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Dashboard</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Tagesübersicht mit Aufgabenstatus, Terminen und wichtigen Kennzahlen auf einen Blick.</p>
+      </div>
+
+      <!-- Aufgabenverwaltung -->
+      <div class="feature-card bg-white rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-planora-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-planora-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Aufgabenverwaltung</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Aufgaben erstellen, zuweisen und priorisieren — mit Unteraufgaben und Fälligkeitsdaten.</p>
+      </div>
+
+      <!-- Projektorganisation -->
+      <div class="feature-card bg-white rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-planora-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-planora-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Projektorganisation</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Hierarchisch strukturierte Projekte, teamübergreifend teilbar und gemeinsam bearbeitbar.</p>
+      </div>
+
+      <!-- Kalender -->
+      <div class="feature-card bg-white rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-planora-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-planora-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Kalenderintegration</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Termine und Aufgaben in einer gemeinsamen Kalenderansicht planen und überblicken.</p>
+      </div>
+
+      <!-- Zeiterfassung -->
+      <div class="feature-card bg-white rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-planora-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-planora-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Zeiterfassung</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Arbeitsprotokolle, digitales Ein-/Ausstempeln und Urlaubsverwaltung integriert.</p>
+      </div>
+
+      <!-- Digital Signage -->
+      <div class="feature-card bg-white rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-planora-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-planora-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Digital Signage</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Anzeigetafeln und Kiosk-Ankündigungen für Flure, Lehrerzimmer und Eingangsbereiche.</p>
+      </div>
+
+      <!-- Module & API -->
+      <div class="feature-card bg-white rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-planora-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-planora-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Konfigurierbare Module</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Nur aktivieren, was Sie brauchen. Vollständige REST-API für Integrationen verfügbar.</p>
+      </div>
+
+      <!-- Team-Kommunikation -->
+      <div class="feature-card bg-white rounded-2xl p-6 border border-slate-100">
+        <div class="w-10 h-10 bg-planora-100 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-planora-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900 mb-2">Team-Verwaltung</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Abteilungen, Rollen und Berechtigungen flexibel konfigurieren und verwalten.</p>
+      </div>
+
+    </div>
+
+    <!-- Demo Box -->
+    <div class="bg-planora-50 border border-planora-200 rounded-2xl p-8 max-w-2xl">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 bg-planora-600 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <h3 class="font-semibold text-slate-900 text-lg mb-1">Planora Live-Demo</h3>
+          <p class="text-slate-600 text-sm mb-4">Testen Sie Planora kostenlos und unverbindlich — keine Registrierung nötig.</p>
+          <div class="space-y-2 text-sm mb-5">
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="text-slate-500 w-16 flex-shrink-0">URL</span>
+              <span class="credential-box text-slate-800">planora.scholar.schule</span>
+            </div>
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="text-slate-500 w-16 flex-shrink-0">E-Mail</span>
+              <span class="credential-box text-slate-800">demo@demo.demo</span>
+              <button onclick="copyToClipboard('demo@demo.demo', this)"
+                      class="text-xs text-planora-600 hover:text-planora-700 font-medium border border-planora-300 rounded px-2 py-0.5 hover:bg-planora-100 transition-colors">
+                Kopieren
+              </button>
+            </div>
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="text-slate-500 w-16 flex-shrink-0">Passwort</span>
+              <span class="credential-box text-slate-800">demo123456</span>
+              <button onclick="copyToClipboard('demo123456', this)"
+                      class="text-xs text-planora-600 hover:text-planora-700 font-medium border border-planora-300 rounded px-2 py-0.5 hover:bg-planora-100 transition-colors">
+                Kopieren
+              </button>
+            </div>
+          </div>
+          <a href="https://planora.scholar.schule" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 px-5 py-2.5 bg-planora-600 text-white rounded-xl font-semibold text-sm hover:bg-planora-500 transition-colors">
+            Planora Demo öffnen
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     REFERENZEN / TESTIMONIALS
+═══════════════════════════════════════════════ -->
+<section id="referenzen" class="bg-brand-900 py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-16">
+      <h2 class="font-display text-3xl sm:text-4xl font-800 text-white mb-4">Schulen vertrauen uns</h2>
+      <p class="text-slate-400 text-lg max-w-xl mx-auto">Erfahren Sie, wie andere Schulen ihren Alltag mit Scholar und Planora vereinfacht haben.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+
+      <!-- Wilhelm-Raabe-Schule -->
+      <div class="bg-brand-800 rounded-2xl p-8 border border-brand-700">
+        <div class="flex gap-1 mb-4">
+          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <blockquote class="text-slate-300 text-sm leading-relaxed mb-6">
+          „Scholar hat unsere tägliche Schulverwaltung grundlegend vereinfacht. Von der Schülerakte bis zur Bibliothek — alles an einem Ort, alles digital. Wir würden es jederzeit wieder einführen."
+        </blockquote>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-brand-700 rounded-full flex items-center justify-center text-slate-300 font-semibold text-sm">WR</div>
+          <div>
+            <p class="text-white font-semibold text-sm">Wilhelm-Raabe-Schule</p>
+            <p class="text-slate-500 text-xs">Schulleitung</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Platzhalter 2 -->
+      <div class="bg-brand-800 rounded-2xl p-8 border border-brand-700 border-dashed opacity-60">
+        <div class="text-center text-slate-500">
+          <svg class="w-8 h-8 mx-auto mb-3 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+          </svg>
+          <p class="text-sm font-medium text-slate-400">Weitere Referenz</p>
+          <p class="text-xs text-slate-600 mt-1">Auf Anfrage verfügbar</p>
+        </div>
+      </div>
+
+      <!-- Platzhalter 3 -->
+      <div class="bg-brand-800 rounded-2xl p-8 border border-brand-700 border-dashed opacity-60">
+        <div class="text-center text-slate-500">
+          <svg class="w-8 h-8 mx-auto mb-3 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+          </svg>
+          <p class="text-sm font-medium text-slate-400">Weitere Referenz</p>
+          <p class="text-xs text-slate-600 mt-1">Auf Anfrage verfügbar</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust stats -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center border-t border-brand-800 pt-12">
+      <div>
+        <p class="text-white font-display text-2xl font-800 mb-1">DSGVO</p>
+        <p class="text-slate-500 text-sm">vollständig konform</p>
+      </div>
+      <div>
+        <p class="text-white font-display text-2xl font-800 mb-1">🇩🇪</p>
+        <p class="text-slate-500 text-sm">Made in Germany</p>
+      </div>
+      <div>
+        <p class="text-white font-display text-2xl font-800 mb-1">99,9%</p>
+        <p class="text-slate-500 text-sm">Systemverfügbarkeit</p>
+      </div>
+      <div>
+        <p class="text-white font-display text-2xl font-800 mb-1">24h</p>
+        <p class="text-slate-500 text-sm">Antwortzeit Support</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PREISE
+═══════════════════════════════════════════════ -->
+<section id="preise" class="bg-white py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-16">
+      <h2 class="font-display text-3xl sm:text-4xl font-800 text-slate-900 mb-4">Transparente Preisgestaltung</h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">Maßgeschneiderte Angebote für Ihre Schule. Kontaktieren Sie uns für ein individuelles, unverbindliches Angebot.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
+
+      <!-- Scholar Basis -->
+      <div class="border border-slate-200 rounded-2xl p-7">
+        <span class="badge bg-scholar-100 text-scholar-600 mb-4">Scholar</span>
+        <h3 class="font-display text-xl font-800 text-slate-900 mb-2">Scholar Basis</h3>
+        <p class="text-slate-500 text-sm mb-6">Ideal für Schulen, die ihre Verwaltung digitalisieren möchten.</p>
+        <ul class="space-y-3 mb-8 text-sm text-slate-600">
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-scholar-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Schülerverwaltung</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-scholar-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Zeugnisse &amp; Noten</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-scholar-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Elternkommunikation</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-scholar-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>DSGVO-konform</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-scholar-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>E-Mail-Support</li>
+        </ul>
+        <a href="#kontakt"
+           class="block text-center px-5 py-3 rounded-xl border-2 border-scholar-500 text-scholar-600 font-semibold hover:bg-scholar-50 transition-colors">
+          Angebot anfragen
+        </a>
+      </div>
+
+      <!-- Planora Basis -->
+      <div class="border border-slate-200 rounded-2xl p-7">
+        <span class="badge bg-planora-100 text-planora-600 mb-4">Planora</span>
+        <h3 class="font-display text-xl font-800 text-slate-900 mb-2">Planora Basis</h3>
+        <p class="text-slate-500 text-sm mb-6">Modernes Arbeitsmanagement für Ihr Schulteam — einzeln buchbar.</p>
+        <ul class="space-y-3 mb-8 text-sm text-slate-600">
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-planora-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Aufgaben &amp; Projekte</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-planora-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Zeiterfassung</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-planora-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Kalenderintegration</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-planora-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Digital Signage</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-planora-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>E-Mail-Support</li>
+        </ul>
+        <a href="#kontakt"
+           class="block text-center px-5 py-3 rounded-xl border-2 border-planora-600 text-planora-600 font-semibold hover:bg-planora-50 transition-colors">
+          Angebot anfragen
+        </a>
+      </div>
+
+      <!-- Scholar + Planora (Empfohlen) -->
+      <div class="pricing-recommended bg-white rounded-2xl p-8 relative">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+          <span class="bg-brand-600 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow">Empfohlen</span>
+        </div>
+        <span class="badge bg-brand-600/10 text-brand-600 mb-4">Scholar + Planora</span>
+        <h3 class="font-display text-xl font-800 text-slate-900 mb-2">Komplett-Paket</h3>
+        <p class="text-slate-500 text-sm mb-6">Die vollständige Lösung — Scholar und Planora kombiniert für maximale Effizienz.</p>
+        <ul class="space-y-3 mb-8 text-sm text-slate-600">
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Alle Scholar-Module</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Alle Planora-Module</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Zeiterfassung &amp; Digital Signage</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>REST-API-Zugang</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Einschulung &amp; Onboarding</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Prioritäts-Support</li>
+        </ul>
+        <a href="#kontakt"
+           class="block text-center px-5 py-3 rounded-xl bg-brand-600 text-white font-semibold hover:bg-brand-700 transition-colors shadow-md">
+          Angebot anfragen
+        </a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="border border-slate-200 rounded-2xl p-8">
+        <span class="badge bg-slate-100 text-slate-600 mb-4">Enterprise</span>
+        <h3 class="font-display text-xl font-800 text-slate-900 mb-2">Schulverbund</h3>
+        <p class="text-slate-500 text-sm mb-6">Für größere Schulverbünde und Bildungsträger mit individuellen Anforderungen.</p>
+        <ul class="space-y-3 mb-8 text-sm text-slate-600">
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-slate-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Alles aus dem Komplett-Paket</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-slate-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Individuelle Anpassungen</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-slate-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Dedizierter Ansprechpartner</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-slate-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>SLA-Garantien</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-slate-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>On-Premise möglich</li>
+        </ul>
+        <a href="#kontakt"
+           class="block text-center px-5 py-3 rounded-xl border-2 border-slate-300 text-slate-700 font-semibold hover:bg-slate-50 transition-colors">
+          Kontakt aufnehmen
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FAQ
+═══════════════════════════════════════════════ -->
+<section id="faq" class="bg-slate-50 py-24">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-12">
+      <h2 class="font-display text-3xl sm:text-4xl font-800 text-slate-900 mb-4">Häufige Fragen</h2>
+      <p class="text-slate-500">Antworten auf die meistgestellten Fragen zu Scholar und Planora.</p>
+    </div>
+
+    <div x-data="{
+      open: null,
+      faqs: [
+        { q: 'Sind Scholar und Planora DSGVO-konform?', a: 'Ja, vollständig. Alle Daten werden ausschließlich auf deutschen Servern gespeichert und verarbeitet. Unsere Systeme entsprechen den Anforderungen der Datenschutz-Grundverordnung (DSGVO). Auf Wunsch stellen wir Ihnen einen Auftragsverarbeitungsvertrag (AVV) zur Verfügung.' },
+        { q: 'Wie lange dauert die Einrichtung?', a: 'Die Grundeinrichtung von Scholar oder Planora ist in der Regel innerhalb eines Schultages abgeschlossen. Wir begleiten Sie beim Onboarding und sorgen dafür, dass der Betrieb reibungslos startet.' },
+        { q: 'Gibt es eine kostenlose Testphase?', a: 'Ja! Sie können beide Produkte sofort und ohne Registrierung über unsere Live-Demos testen: Scholar unter demo.scholar.schule und Planora unter planora.scholar.schule. Zugangsdaten: demo@demo.demo / demo123456.' },
+        { q: 'Kann ich Scholar und Planora einzeln buchen?', a: 'Ja, beide Produkte sind vollständig unabhängig voneinander nutzbar. Sie können Scholar allein, Planora allein oder beide Produkte im Kombiangebot buchen.' },
+        { q: 'Welche Browser werden unterstützt?', a: 'Scholar und Planora laufen in allen aktuellen Browsern: Google Chrome, Mozilla Firefox, Safari und Microsoft Edge. Eine native App ist nicht erforderlich.' },
+        { q: 'Bieten Sie Schulungen an?', a: 'Ja. Wir bieten Online-Schulungen sowie Vor-Ort-Schulungen an. Zusätzlich steht unsere ausführliche Dokumentation jederzeit unter wiki.scholar.schule zur Verfügung.' },
+        { q: 'Wie werden Updates eingespielt?', a: 'Updates erfolgen automatisch im Hintergrund, ohne Unterbrechung des laufenden Schulbetriebs. Sie erhalten immer die neueste Version, ohne manuell aktiv werden zu müssen.' },
+        { q: 'Gibt es eine API für eigene Integrationen?', a: 'Planora verfügt über eine vollständige REST-API. Für Scholar-spezifische Integrationen sprechen Sie uns bitte direkt an — wir finden gemeinsam eine Lösung.' }
+      ]
+    }" class="divide-y divide-slate-200 border border-slate-200 rounded-2xl overflow-hidden bg-white">
+      <template x-for="(item, i) in faqs" :key="i">
+        <div>
+          <button @click="open === i ? open = null : open = i"
+                  class="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-slate-50 transition-colors">
+            <span class="font-semibold text-slate-800 text-sm sm:text-base" x-text="item.q"></span>
+            <svg class="chevron w-5 h-5 text-slate-400 flex-shrink-0" :class="open === i ? 'chevron-open' : 'chevron-closed'"
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div x-show="open === i" x-transition:enter="transition ease-out duration-200"
+               x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+               class="px-6 pb-5">
+            <p class="text-slate-600 text-sm leading-relaxed" x-text="item.a"></p>
+          </div>
+        </div>
+      </template>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     KONTAKT & ANGEBOTSANFRAGE
+═══════════════════════════════════════════════ -->
+<section id="kontakt" class="bg-white py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-16">
+      <h2 class="font-display text-3xl sm:text-4xl font-800 text-slate-900 mb-4">Sprechen Sie uns an</h2>
+      <p class="text-slate-500 text-lg">Wir antworten innerhalb von 24 Stunden — werktags meist noch schneller.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+      <!-- Kontaktformular -->
+      <div>
+        <h3 class="font-display text-2xl font-800 text-slate-900 mb-2">Kontakt aufnehmen</h3>
+        <p class="text-slate-500 text-sm mb-6">Allgemeine Fragen, technischer Support oder Partnerschaftsanfragen.</p>
+
+        <div id="kontakt-success" class="hidden form-banner mb-4 p-4 bg-scholar-50 border border-scholar-200 rounded-xl text-scholar-700 text-sm font-medium">
+          ✓ Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns schnellstmöglich.
+        </div>
+        <div id="kontakt-error" class="hidden form-banner mb-4 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm font-medium">
+          Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.
+        </div>
+
+        <form action="https://formspree.io/f/mkoppbro" method="POST"
+              onsubmit="event.preventDefault(); submitForm(this, 'kontakt-success', 'kontakt-error')"
+              class="space-y-4">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+          <div>
+            <label for="k-name" class="block text-sm font-medium text-slate-700 mb-1">Vor- und Nachname *</label>
+            <input type="text" id="k-name" name="name" required
+                   class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:border-brand-500 transition-colors">
+          </div>
+
+          <div>
+            <label for="k-email" class="block text-sm font-medium text-slate-700 mb-1">E-Mail-Adresse *</label>
+            <input type="email" id="k-email" name="email" required
+                   class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:border-brand-500 transition-colors">
+          </div>
+
+          <div>
+            <label for="k-org" class="block text-sm font-medium text-slate-700 mb-1">Schule / Organisation</label>
+            <input type="text" id="k-org" name="organisation"
+                   class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:border-brand-500 transition-colors">
+          </div>
+
+          <div>
+            <label for="k-subject" class="block text-sm font-medium text-slate-700 mb-1">Betreff *</label>
+            <select id="k-subject" name="betreff" required
+                    class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:border-brand-500 transition-colors bg-white">
+              <option value="">Bitte wählen…</option>
+              <option>Allgemeine Anfrage</option>
+              <option>Technischer Support</option>
+              <option>Angebotsanfrage</option>
+              <option>Partnerschaft</option>
+              <option>Sonstiges</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="k-message" class="block text-sm font-medium text-slate-700 mb-1">Nachricht *</label>
+            <textarea id="k-message" name="nachricht" required rows="5"
+                      class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:border-brand-500 transition-colors resize-y"></textarea>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <input type="checkbox" id="k-dsgvo" name="datenschutz" required
+                   class="mt-0.5 w-4 h-4 text-brand-600 border-slate-300 rounded">
+            <label for="k-dsgvo" class="text-xs text-slate-500 leading-relaxed">
+              Ich habe die <a href="datenschutz.html" class="text-brand-600 underline">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu. *
+            </label>
+          </div>
+
+          <button type="submit"
+                  class="w-full px-6 py-3 bg-brand-600 text-white rounded-xl font-semibold hover:bg-brand-700 transition-colors shadow-md">
+            Nachricht senden
+          </button>
+        </form>
+      </div>
+
+      <!-- Angebotsanfrage -->
+      <div class="bg-slate-50 rounded-2xl p-8">
+        <h3 class="font-display text-2xl font-800 text-slate-900 mb-2">Angebot anfordern</h3>
+        <p class="text-slate-500 text-sm mb-6">Erhalten Sie ein maßgeschneidertes, unverbindliches Angebot für Ihre Schule.</p>
+
+        <div id="angebot-success" class="hidden form-banner mb-4 p-4 bg-planora-50 border border-planora-200 rounded-xl text-planora-700 text-sm font-medium">
+          ✓ Vielen Dank! Wir erstellen Ihr individuelles Angebot und melden uns in Kürze.
+        </div>
+        <div id="angebot-error" class="hidden form-banner mb-4 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm font-medium">
+          Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.
+        </div>
+
+        <form action="https://formspree.io/f/mkoppbro" method="POST"
+              onsubmit="event.preventDefault(); submitForm(this, 'angebot-success', 'angebot-error')"
+              class="space-y-4">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="_subject" value="Angebotsanfrage scholar.schule">
+
+          <div>
+            <label for="a-name" class="block text-sm font-medium text-slate-700 mb-1">Ansprechpartner *</label>
+            <input type="text" id="a-name" name="name" required
+                   class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-white focus:border-planora-500 transition-colors">
+          </div>
+
+          <div>
+            <label for="a-email" class="block text-sm font-medium text-slate-700 mb-1">E-Mail-Adresse *</label>
+            <input type="email" id="a-email" name="email" required
+                   class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-white focus:border-planora-500 transition-colors">
+          </div>
+
+          <div>
+            <label for="a-school" class="block text-sm font-medium text-slate-700 mb-1">Schule / Institution *</label>
+            <input type="text" id="a-school" name="schule" required
+                   class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-white focus:border-planora-500 transition-colors">
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="a-state" class="block text-sm font-medium text-slate-700 mb-1">Bundesland *</label>
+              <select id="a-state" name="bundesland" required
+                      class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-white focus:border-planora-500 transition-colors">
+                <option value="">Bitte wählen…</option>
+                <option>Baden-Württemberg</option>
+                <option>Bayern</option>
+                <option>Berlin</option>
+                <option>Brandenburg</option>
+                <option>Bremen</option>
+                <option>Hamburg</option>
+                <option>Hessen</option>
+                <option>Mecklenburg-Vorpommern</option>
+                <option>Niedersachsen</option>
+                <option>Nordrhein-Westfalen</option>
+                <option>Rheinland-Pfalz</option>
+                <option>Saarland</option>
+                <option>Sachsen</option>
+                <option>Sachsen-Anhalt</option>
+                <option>Schleswig-Holstein</option>
+                <option>Thüringen</option>
+              </select>
+            </div>
+            <div>
+              <label for="a-students" class="block text-sm font-medium text-slate-700 mb-1">Schülerzahl</label>
+              <select id="a-students" name="schueleranzahl"
+                      class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-white focus:border-planora-500 transition-colors">
+                <option>unter 200</option>
+                <option>200 – 500</option>
+                <option>500 – 1.000</option>
+                <option>über 1.000</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-sm font-medium text-slate-700 mb-2">Interesse an *</p>
+            <div class="flex flex-wrap gap-4">
+              <label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                <input type="checkbox" name="produkt" value="Scholar" class="w-4 h-4 text-brand-600 border-slate-300 rounded"> Scholar
+              </label>
+              <label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                <input type="checkbox" name="produkt" value="Planora" class="w-4 h-4 text-brand-600 border-slate-300 rounded"> Planora
+              </label>
+              <label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                <input type="checkbox" name="produkt" value="Beide" class="w-4 h-4 text-brand-600 border-slate-300 rounded"> Beide Produkte
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label for="a-notes" class="block text-sm font-medium text-slate-700 mb-1">Besondere Anforderungen / Wünsche</label>
+            <textarea id="a-notes" name="anforderungen" rows="3"
+                      placeholder="z.B. bestimmte Module, Integrationen, Zeitrahmen…"
+                      class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-white focus:border-planora-500 transition-colors resize-y"></textarea>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <input type="checkbox" id="a-dsgvo" name="datenschutz" required
+                   class="mt-0.5 w-4 h-4 text-brand-600 border-slate-300 rounded">
+            <label for="a-dsgvo" class="text-xs text-slate-500 leading-relaxed">
+              Ich habe die <a href="datenschutz.html" class="text-brand-600 underline">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Angebotserstellung zu. *
+            </label>
+          </div>
+
+          <button type="submit"
+                  class="w-full px-6 py-3 bg-planora-600 text-white rounded-xl font-semibold hover:bg-planora-500 transition-colors shadow-md">
+            Angebot anfordern
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     RESSOURCEN / QUICK LINKS
+═══════════════════════════════════════════════ -->
+<section id="ressourcen" class="bg-brand-900 py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="font-display text-2xl sm:text-3xl font-800 text-white mb-2">Schnellzugang</h2>
+      <p class="text-slate-400 text-sm">Direkte Links zu Ihren wichtigsten Ressourcen.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <a href="https://crm.scholar.schule" target="_blank" rel="noopener"
+         class="resource-card group bg-brand-800 hover:bg-brand-700 rounded-2xl p-8 border border-brand-700 flex items-start gap-5 transition-colors">
+        <div class="w-12 h-12 bg-brand-700 group-hover:bg-brand-600 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors">
+          <svg class="w-6 h-6 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-white font-semibold mb-1">Kundenzugang CRM</p>
+          <p class="text-slate-400 text-sm leading-relaxed">Verwalten Sie Ihr bestehendes Konto, Benutzer und Einstellungen.</p>
+          <p class="text-brand-400 text-xs mt-2 font-medium group-hover:text-brand-300">crm.scholar.schule →</p>
+        </div>
+      </a>
+
+      <a href="https://wiki.scholar.schule/" target="_blank" rel="noopener"
+         class="resource-card group bg-brand-800 hover:bg-brand-700 rounded-2xl p-8 border border-brand-700 flex items-start gap-5 transition-colors">
+        <div class="w-12 h-12 bg-brand-700 group-hover:bg-brand-600 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors">
+          <svg class="w-6 h-6 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-white font-semibold mb-1">Dokumentation &amp; Wiki</p>
+          <p class="text-slate-400 text-sm leading-relaxed">Handbücher, Tutorials und technische Dokumentation zu beiden Produkten.</p>
+          <p class="text-brand-400 text-xs mt-2 font-medium group-hover:text-brand-300">wiki.scholar.schule →</p>
+        </div>
+      </a>
+
+      <a href="#scholar"
+         class="resource-card group bg-brand-800 hover:bg-brand-700 rounded-2xl p-8 border border-brand-700 flex items-start gap-5 transition-colors">
+        <div class="w-12 h-12 bg-brand-700 group-hover:bg-brand-600 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors">
+          <svg class="w-6 h-6 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-white font-semibold mb-1">Live-Demo testen</p>
+          <p class="text-slate-400 text-sm leading-relaxed">Scholar und Planora sofort und unverbindlich im Browser ausprobieren.</p>
+          <p class="text-brand-400 text-xs mt-2 font-medium group-hover:text-brand-300">Demo-Zugangsdaten ansehen →</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer class="bg-brand-900 border-t border-brand-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+
+      <!-- Brand -->
+      <div class="lg:col-span-1">
+        <div class="font-display text-xl font-900 mb-3">
+          <span class="text-brand-500">scholar</span><span class="text-slate-400">.schule</span>
+        </div>
+        <p class="text-slate-500 text-sm leading-relaxed mb-4">
+          Moderne Schulsoftware.<br>Made in Germany.
+        </p>
+        <div class="flex items-center gap-2 text-xs text-slate-600">
+          <svg class="w-3.5 h-3.5 text-scholar-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clip-rule="evenodd"/>
+          </svg>
+          DSGVO-konform · Deutsche Server
+        </div>
+      </div>
+
+      <!-- Produkte -->
+      <div>
+        <p class="text-slate-300 font-semibold text-sm mb-4">Produkte</p>
+        <ul class="space-y-2.5 text-sm text-slate-500">
+          <li><a href="#scholar" class="hover:text-slate-300 transition-colors">Scholar</a></li>
+          <li><a href="#planora" class="hover:text-slate-300 transition-colors">Planora</a></li>
+          <li><a href="https://demo.scholar.schule" target="_blank" rel="noopener" class="hover:text-slate-300 transition-colors">Scholar Demo</a></li>
+          <li><a href="https://planora.scholar.schule" target="_blank" rel="noopener" class="hover:text-slate-300 transition-colors">Planora Demo</a></li>
+          <li><a href="https://wiki.scholar.schule/" target="_blank" rel="noopener" class="hover:text-slate-300 transition-colors">Dokumentation</a></li>
+        </ul>
+      </div>
+
+      <!-- Unternehmen -->
+      <div>
+        <p class="text-slate-300 font-semibold text-sm mb-4">Unternehmen</p>
+        <ul class="space-y-2.5 text-sm text-slate-500">
+          <li><a href="#referenzen" class="hover:text-slate-300 transition-colors">Referenzen</a></li>
+          <li><a href="#preise" class="hover:text-slate-300 transition-colors">Preise</a></li>
+          <li><a href="#faq" class="hover:text-slate-300 transition-colors">FAQ</a></li>
+          <li><a href="#kontakt" class="hover:text-slate-300 transition-colors">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <!-- Rechtliches & Support -->
+      <div>
+        <p class="text-slate-300 font-semibold text-sm mb-4">Rechtliches &amp; Support</p>
+        <ul class="space-y-2.5 text-sm text-slate-500">
+          <li><a href="impressum.html" class="hover:text-slate-300 transition-colors">Impressum</a></li>
+          <li><a href="datenschutz.html" class="hover:text-slate-300 transition-colors">Datenschutz</a></li>
+          <li><a href="https://crm.scholar.schule" target="_blank" rel="noopener" class="hover:text-slate-300 transition-colors">Kundenzugang CRM</a></li>
+          <li><a href="#kontakt" class="hover:text-slate-300 transition-colors">Support</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="border-t border-brand-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-slate-600 text-xs">© <span id="current-year"></span> Dashtec.de · Alle Rechte vorbehalten</p>
+      <p class="text-slate-700 text-xs">scholar.schule — <span class="text-scholar-600">Scholar</span> &amp; <span class="text-planora-500">Planora</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════
+     COOKIE BANNER
+═══════════════════════════════════════════════ -->
+<div x-show="!cookieOk"
+     x-transition:enter="transition ease-out duration-300"
+     x-transition:enter-start="opacity-0 translate-y-4"
+     x-transition:enter-end="opacity-100 translate-y-0"
+     class="fixed bottom-0 left-0 right-0 z-50 p-4 bg-brand-900/95 backdrop-blur border-t border-brand-800 no-print">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <p class="text-slate-300 text-sm">
+      Diese Website verwendet technisch notwendige Cookies.
+      <a href="datenschutz.html" class="text-brand-400 underline ml-1">Mehr erfahren</a>
+    </p>
+    <button @click="localStorage.setItem('cookieOk','1'); cookieOk = true"
+            class="flex-shrink-0 px-5 py-2 bg-brand-600 text-white text-sm font-semibold rounded-lg hover:bg-brand-700 transition-colors">
+      Verstanden
+    </button>
+  </div>
+</div>
+
+<!-- Custom JS -->
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
