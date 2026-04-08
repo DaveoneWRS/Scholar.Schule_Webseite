@@ -91,8 +91,6 @@
       <nav class="hidden lg:flex items-center gap-1">
         <a href="#planora"    data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
            :class="scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-200 hover:text-white hover:bg-white/10'">Planora</a>
-        <a href="#referenzen" data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
-           :class="scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-200 hover:text-white hover:bg-white/10'">Referenzen</a>
         <a href="#preise"     data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
            :class="scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-200 hover:text-white hover:bg-white/10'">Preise</a>
         <a href="#faq"        data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
@@ -125,7 +123,6 @@
   <div x-show="mobileOpen" x-transition class="lg:hidden bg-white border-t border-gray-100 shadow-lg">
     <div class="px-4 py-4 space-y-1">
       <a href="#planora"    @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Planora</a>
-      <a href="#referenzen" @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Referenzen</a>
       <a href="#preise"     @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Preise</a>
       <a href="#faq"        @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">FAQ</a>
       <a href="#kontakt"    @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Kontakt</a>
@@ -538,9 +535,9 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     REFERENZEN / TESTIMONIALS
+     REFERENZEN / TESTIMONIALS (ausgeblendet)
 ═══════════════════════════════════════════════ -->
-<section id="referenzen" class="bg-brand-900 py-24">
+<section id="referenzen" class="bg-brand-900 py-24" hidden>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="text-center mb-16">
@@ -971,7 +968,7 @@
         <div>
           <p class="text-white font-semibold mb-1">Kundenzugang CRM</p>
           <p class="text-slate-400 text-sm leading-relaxed">Verwalten Sie Ihr bestehendes Konto, Benutzer und Einstellungen.</p>
-          <p class="text-brand-400 text-xs mt-2 font-medium group-hover:text-brand-300">crm.scholar.schule →</p>
+          <p class="text-slate-300 text-xs mt-2 font-medium group-hover:text-white">crm.scholar.schule →</p>
         </div>
       </a>
 
@@ -985,7 +982,7 @@
         <div>
           <p class="text-white font-semibold mb-1">Dokumentation &amp; Wiki</p>
           <p class="text-slate-400 text-sm leading-relaxed">Handbücher, Tutorials und technische Dokumentation zu beiden Produkten.</p>
-          <p class="text-brand-400 text-xs mt-2 font-medium group-hover:text-brand-300">wiki.scholar.schule →</p>
+          <p class="text-slate-300 text-xs mt-2 font-medium group-hover:text-white">wiki.scholar.schule →</p>
         </div>
       </a>
 
@@ -1000,7 +997,7 @@
         <div>
           <p class="text-white font-semibold mb-1">Live-Demo testen</p>
           <p class="text-slate-400 text-sm leading-relaxed">Scholar und Planora sofort und unverbindlich im Browser ausprobieren.</p>
-          <p class="text-brand-400 text-xs mt-2 font-medium group-hover:text-brand-300">Demo-Zugangsdaten ansehen →</p>
+          <p class="text-slate-300 text-xs mt-2 font-medium group-hover:text-white">Demo-Zugangsdaten ansehen →</p>
         </div>
       </a>
 
