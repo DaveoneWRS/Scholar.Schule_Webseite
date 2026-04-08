@@ -89,8 +89,6 @@
 
       <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-1">
-        <a href="#scholar"    data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
-           :class="scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-200 hover:text-white hover:bg-white/10'">Scholar</a>
         <a href="#planora"    data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
            :class="scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-200 hover:text-white hover:bg-white/10'">Planora</a>
         <a href="#referenzen" data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
@@ -110,10 +108,6 @@
            :class="scrolled ? 'border-slate-300 text-slate-700 hover:bg-slate-50' : 'border-white/30 text-white hover:bg-white/10'">
           Kundenzugang
         </a>
-        <a href="#kontakt"
-           class="px-4 py-2 rounded-lg text-sm font-semibold bg-brand-600 text-white hover:bg-brand-700 transition-colors shadow-md">
-          Demo anfordern
-        </a>
       </div>
 
       <!-- Mobile hamburger -->
@@ -130,7 +124,6 @@
   <!-- Mobile menu -->
   <div x-show="mobileOpen" x-transition class="lg:hidden bg-white border-t border-gray-100 shadow-lg">
     <div class="px-4 py-4 space-y-1">
-      <a href="#scholar"    @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Scholar</a>
       <a href="#planora"    @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Planora</a>
       <a href="#referenzen" @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Referenzen</a>
       <a href="#preise"     @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Preise</a>
@@ -139,8 +132,6 @@
       <div class="pt-2 border-t border-gray-100 flex gap-2">
         <a href="https://crm.scholar.schule" target="_blank" rel="noopener"
            class="flex-1 text-center px-3 py-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-700">Kundenzugang</a>
-        <a href="#kontakt" @click="mobileOpen=false"
-           class="flex-1 text-center px-3 py-2 rounded-lg bg-brand-600 text-white text-sm font-semibold">Demo anfordern</a>
       </div>
     </div>
   </div>
@@ -197,9 +188,9 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     TRUST BAR
+     TRUST BAR (ausgeblendet)
 ═══════════════════════════════════════════════ -->
-<section id="vertrauen" class="bg-white border-b border-slate-100">
+<section id="vertrauen" class="bg-white border-b border-slate-100" hidden>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex flex-wrap items-center justify-center gap-8 text-slate-500 text-sm font-medium">
       <span class="text-slate-400 text-xs uppercase tracking-widest">Vertraut von Schulen in Deutschland</span>
@@ -229,9 +220,9 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     SCHOLAR PRODUKTSEKTION
+     SCHOLAR PRODUKTSEKTION (ausgeblendet)
 ═══════════════════════════════════════════════ -->
-<section id="scholar" class="bg-white py-24">
+<section id="scholar" class="bg-white py-24" hidden>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Header -->
