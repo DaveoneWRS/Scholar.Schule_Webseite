@@ -2,6 +2,28 @@
 
 html {
   scroll-behavior: smooth;
+  /* Fixed header is 4rem high – Sprungziele nicht darunter schieben */
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Alpine: Elemente bis zum Start von Alpine.js ausblenden */
+[x-cloak] {
+  display: none !important;
+}
+
+/* Scroll-spy: aktiver Nav-Link (schlägt die Alpine :class-Bindung) */
+nav a.nav-active {
+  color: #93C5FD !important;
+  font-weight: 600;
+}
+header[class*="bg-white"] nav a.nav-active {
+  color: #2563EB !important;
 }
 
 /* Hero dot-grid background */

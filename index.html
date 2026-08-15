@@ -30,8 +30,13 @@
             sans:    ['Inter', 'system-ui', 'sans-serif'],
             display: ['Nunito', 'Inter', 'sans-serif'],
           },
+          fontWeight: {
+            800: '800',
+            900: '900',
+          },
           colors: {
             brand: {
+              400: '#60A5FA',
               500: '#3B82F6',
               600: '#2563EB',
               700: '#1D4ED8',
@@ -42,17 +47,21 @@
               50:  '#F0FDF4',
               100: '#DCFCE7',
               200: '#BBF7D0',
+              300: '#86EFAC',
               400: '#22C55E',
               500: '#16A34A',
               600: '#15803D',
+              700: '#166534',
             },
             planora: {
               50:  '#F5F3FF',
               100: '#EDE9FE',
               200: '#DDD6FE',
+              300: '#C4B5FD',
               400: '#A78BFA',
               500: '#8B5CF6',
               600: '#7C3AED',
+              700: '#6D28D9',
             },
           },
         },
@@ -73,14 +82,17 @@
 ═══════════════════════════════════════════════ -->
 <header
   x-data="{ mobileOpen: false, scrolled: false }"
+  x-init="scrolled = window.scrollY > 50"
   @scroll.window="scrolled = window.scrollY > 50"
+  @click.outside="mobileOpen = false"
+  @keydown.escape.window="mobileOpen = false"
   :class="scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100' : 'bg-transparent'"
   class="fixed top-0 w-full z-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
 
       <!-- Logo / Wordmark -->
-      <a href="#" class="flex items-center gap-2 group">
+      <a href="#hero" class="flex items-center gap-2 group">
         <span class="text-xl font-display font-900 tracking-tight"
               :class="scrolled ? 'text-slate-900' : 'text-white'">
           <span class="text-brand-600">scholar</span><span :class="scrolled ? 'text-slate-400' : 'text-slate-300'">.schule</span>
@@ -89,6 +101,8 @@
 
       <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-1">
+        <a href="#scholar"    data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+           :class="scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-200 hover:text-white hover:bg-white/10'">Scholar</a>
         <a href="#planora"    data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
            :class="scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-200 hover:text-white hover:bg-white/10'">Planora</a>
         <a href="#preise"     data-spy class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
@@ -110,7 +124,8 @@
 
       <!-- Mobile hamburger -->
       <button @click="mobileOpen = !mobileOpen" class="lg:hidden p-2 rounded-lg"
-              :class="scrolled ? 'text-slate-600' : 'text-white'">
+              :class="scrolled ? 'text-slate-600' : 'text-white'"
+              :aria-expanded="mobileOpen" aria-controls="mobile-menu" aria-label="Menü öffnen">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path x-show="!mobileOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           <path x-show="mobileOpen"  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -120,8 +135,9 @@
   </div>
 
   <!-- Mobile menu -->
-  <div x-show="mobileOpen" x-transition class="lg:hidden bg-white border-t border-gray-100 shadow-lg">
+  <div id="mobile-menu" x-show="mobileOpen" x-cloak x-transition class="lg:hidden bg-white border-t border-gray-100 shadow-lg">
     <div class="px-4 py-4 space-y-1">
+      <a href="#scholar"    @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Scholar</a>
       <a href="#planora"    @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Planora</a>
       <a href="#preise"     @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Preise</a>
       <a href="#faq"        @click="mobileOpen=false" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">FAQ</a>
@@ -219,7 +235,7 @@
 <!-- ═══════════════════════════════════════════════
      SCHOLAR PRODUKTSEKTION (ausgeblendet)
 ═══════════════════════════════════════════════ -->
-<section id="scholar" class="bg-white py-24" hidden>
+<section id="scholar" class="bg-white py-24">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Header -->
@@ -342,7 +358,7 @@
           <div class="space-y-2 text-sm mb-5">
             <div class="flex items-center gap-3 flex-wrap">
               <span class="text-slate-500 w-16 flex-shrink-0">URL</span>
-              <span class="credential-box text-slate-800">demo.scholar.schule</span>
+              <span class="credential-box text-slate-800">wiki.scholar.schule</span>
             </div>
             <div class="flex items-center gap-3 flex-wrap">
               <span class="text-slate-500 w-16 flex-shrink-0">E-Mail</span>
@@ -361,7 +377,7 @@
               </button>
             </div>
           </div>
-          <a href="https://demo.scholar.schule" target="_blank" rel="noopener"
+          <a href="https://wiki.scholar.schule/" target="_blank" rel="noopener"
              class="inline-flex items-center gap-2 px-5 py-2.5 bg-scholar-500 text-white rounded-xl font-semibold text-sm hover:bg-scholar-600 transition-colors">
             Scholar Demo öffnen
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -501,7 +517,7 @@
           <div class="space-y-2 text-sm mb-5">
             <div class="flex items-center gap-3 flex-wrap">
               <span class="text-slate-500 w-16 flex-shrink-0">URL</span>
-              <span class="credential-box text-slate-800">planora.scholar.schule</span>
+              <span class="credential-box text-slate-800">wiki.scholar.schule</span>
             </div>
             <div class="flex items-center gap-3 flex-wrap">
               <span class="text-slate-500 w-16 flex-shrink-0">E-Mail</span>
@@ -520,7 +536,7 @@
               </button>
             </div>
           </div>
-          <a href="https://planora.scholar.schule" target="_blank" rel="noopener"
+          <a href="https://wiki.scholar.schule/" target="_blank" rel="noopener"
              class="inline-flex items-center gap-2 px-5 py-2.5 bg-planora-600 text-white rounded-xl font-semibold text-sm hover:bg-planora-500 transition-colors">
             Planora Demo öffnen
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -639,7 +655,7 @@
           <li class="flex items-center gap-2"><svg class="w-4 h-4 text-scholar-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>DSGVO-konform</li>
           <li class="flex items-center gap-2"><svg class="w-4 h-4 text-scholar-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>E-Mail-Support</li>
         </ul>
-        <a href="#kontakt"
+        <a href="#angebot"
            class="block text-center px-5 py-3 rounded-xl border-2 border-scholar-500 text-scholar-600 font-semibold hover:bg-scholar-50 transition-colors">
           Angebot anfragen
         </a>
@@ -657,7 +673,7 @@
           <li class="flex items-center gap-2"><svg class="w-4 h-4 text-planora-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Digital Signage</li>
           <li class="flex items-center gap-2"><svg class="w-4 h-4 text-planora-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>E-Mail-Support</li>
         </ul>
-        <a href="#kontakt"
+        <a href="#angebot"
            class="block text-center px-5 py-3 rounded-xl border-2 border-planora-600 text-planora-600 font-semibold hover:bg-planora-50 transition-colors">
           Angebot anfragen
         </a>
@@ -679,7 +695,7 @@
           <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Einschulung &amp; Onboarding</li>
           <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Prioritäts-Support</li>
         </ul>
-        <a href="#kontakt"
+        <a href="#angebot"
            class="block text-center px-5 py-3 rounded-xl bg-brand-600 text-white font-semibold hover:bg-brand-700 transition-colors shadow-md">
           Angebot anfragen
         </a>
@@ -723,7 +739,7 @@
       faqs: [
         { q: 'Sind Scholar und Planora DSGVO-konform?', a: 'Ja, vollständig. Alle Daten werden ausschließlich auf deutschen Servern gespeichert und verarbeitet. Unsere Systeme entsprechen den Anforderungen der Datenschutz-Grundverordnung (DSGVO). Auf Wunsch stellen wir Ihnen einen Auftragsverarbeitungsvertrag (AVV) zur Verfügung.' },
         { q: 'Wie lange dauert die Einrichtung?', a: 'Die Grundeinrichtung von Scholar oder Planora ist in der Regel innerhalb eines Schultages abgeschlossen. Wir begleiten Sie beim Onboarding und sorgen dafür, dass der Betrieb reibungslos startet.' },
-        { q: 'Gibt es eine kostenlose Testphase?', a: 'Ja! Sie können beide Produkte sofort und ohne Registrierung über unsere Live-Demos testen: Scholar unter demo.scholar.schule und Planora unter planora.scholar.schule. Zugangsdaten: demo@demo.demo / demo123456.' },
+        { q: 'Gibt es eine kostenlose Testphase?', a: 'Ja! Sie können beide Produkte sofort und ohne Registrierung über unsere Live-Demos testen. Den Demo-Zugang (URL und Zugangsdaten) finden Sie auf wiki.scholar.schule.' },
         { q: 'Kann ich Scholar und Planora einzeln buchen?', a: 'Ja, beide Produkte sind vollständig unabhängig voneinander nutzbar. Sie können Scholar allein, Planora allein oder beide Produkte im Kombiangebot buchen.' },
         { q: 'Welche Browser werden unterstützt?', a: 'Scholar und Planora laufen in allen aktuellen Browsern: Google Chrome, Mozilla Firefox, Safari und Microsoft Edge. Eine native App ist nicht erforderlich.' },
         { q: 'Bieten Sie Schulungen an?', a: 'Ja. Wir bieten Online-Schulungen sowie Vor-Ort-Schulungen an. Zusätzlich steht unsere ausführliche Dokumentation jederzeit unter wiki.scholar.schule zur Verfügung.' },
@@ -836,7 +852,7 @@
       </div>
 
       <!-- Angebotsanfrage -->
-      <div class="bg-slate-50 rounded-2xl p-8">
+      <div id="angebot" class="bg-slate-50 rounded-2xl p-8">
         <h3 class="font-display text-2xl font-800 text-slate-900 mb-2">Angebot anfordern</h3>
         <p class="text-slate-500 text-sm mb-6">Erhalten Sie ein maßgeschneidertes, unverbindliches Angebot für Ihre Schule.</p>
 
@@ -986,7 +1002,7 @@
         </div>
       </a>
 
-      <a href="#scholar"
+      <a href="https://wiki.scholar.schule/" target="_blank" rel="noopener"
          class="resource-card group bg-brand-800 hover:bg-brand-700 rounded-2xl p-8 border border-brand-700 flex items-start gap-5 transition-colors">
         <div class="w-12 h-12 bg-brand-700 group-hover:bg-brand-600 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors">
           <svg class="w-6 h-6 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1034,8 +1050,8 @@
         <ul class="space-y-2.5 text-sm text-slate-500">
           <li><a href="#scholar" class="hover:text-slate-300 transition-colors">Scholar</a></li>
           <li><a href="#planora" class="hover:text-slate-300 transition-colors">Planora</a></li>
-          <li><a href="https://demo.scholar.schule" target="_blank" rel="noopener" class="hover:text-slate-300 transition-colors">Scholar Demo</a></li>
-          <li><a href="https://planora.scholar.schule" target="_blank" rel="noopener" class="hover:text-slate-300 transition-colors">Planora Demo</a></li>
+          <li><a href="https://wiki.scholar.schule/" target="_blank" rel="noopener" class="hover:text-slate-300 transition-colors">Scholar Demo</a></li>
+          <li><a href="https://wiki.scholar.schule/" target="_blank" rel="noopener" class="hover:text-slate-300 transition-colors">Planora Demo</a></li>
           <li><a href="https://wiki.scholar.schule/" target="_blank" rel="noopener" class="hover:text-slate-300 transition-colors">Dokumentation</a></li>
         </ul>
       </div>
@@ -1044,7 +1060,6 @@
       <div>
         <p class="text-slate-300 font-semibold text-sm mb-4">Unternehmen</p>
         <ul class="space-y-2.5 text-sm text-slate-500">
-          <li><a href="#referenzen" class="hover:text-slate-300 transition-colors">Referenzen</a></li>
           <li><a href="#preise" class="hover:text-slate-300 transition-colors">Preise</a></li>
           <li><a href="#faq" class="hover:text-slate-300 transition-colors">FAQ</a></li>
           <li><a href="#kontakt" class="hover:text-slate-300 transition-colors">Kontakt</a></li>
@@ -1074,7 +1089,7 @@
 <!-- ═══════════════════════════════════════════════
      COOKIE BANNER
 ═══════════════════════════════════════════════ -->
-<div x-show="!cookieOk"
+<div x-show="!cookieOk" x-cloak
      x-transition:enter="transition ease-out duration-300"
      x-transition:enter-start="opacity-0 translate-y-4"
      x-transition:enter-end="opacity-100 translate-y-0"
