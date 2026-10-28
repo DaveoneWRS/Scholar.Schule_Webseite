@@ -1,0 +1,62 @@
+name: SSH-Diagnose
+
+# Nur manuell startbar: Actions → SSH-Diagnose → Run workflow
+on:
+  workflow_dispatch:
+
+jobs:
+  diagnose:
+    name: SSH-Erreichbarkeit pruefen
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Runner-Herkunft
+        run: |
+          echo "Oeffentliche IP des Runners: $(curl -s --max-time 10 https://api.ipify.org)"
+
+      - name: SSH_HOST aufloesen
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          # Der Secret-Wert selbst wird im Log maskiert (***), aufgeloeste IPs nicht.
+          if [ -z "$SSH_HOST" ]; then
+            echo "::error::SSH_HOST ist leer"
+            exit 1
+          fi
+          echo "Laenge des Werts: ${#SSH_HOST} Zeichen"
+
+          if [[ "$SSH_HOST" =~ ^[0-9]+(\.[0-9]+){3}$ ]]; then
+            echo "SSH_HOST ist eine IPv4-Adresse (Wert maskiert)."
+            IPS="$SSH_HOST"
+          else
+            echo "SSH_HOST ist ein Hostname. Aufgeloeste Adressen:"
+            getent ahostsv4 "$SSH_HOST" | awk '{print $1}' | sort -u | tee /tmp/ips
+            IPS="$(cat /tmp/ips)"
+          fi
+
+          curl -s --max-time 10 https://www.cloudflare.com/ips-v4 > /tmp/cf-ranges
+          for ip in $IPS; do
+            if python3 -c "import ipaddress,sys; ip=ipaddress.ip_address(sys.argv[1]); sys.exit(0 if any(ip in ipaddress.ip_network(n.strip()) for n in open('/tmp/cf-ranges') if n.strip()) else 1)" "$ip"; then
+              echo "::warning::$ip gehoert zu Cloudflare – dort ist kein SSH moeglich."
+            else
+              echo "$ip ist keine Cloudflare-Adresse."
+            fi
+          done
+        continue-on-error: true
+
+      - name: Port 22 testen
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          check() {
+            local label="$1" target="$2"
+            if timeout 10 bash -c "exec 3<>/dev/tcp/$target/22 && head -c 60 <&3"; then
+              echo
+              echo "OK      $label: Port 22 erreichbar"
+            else
+              echo "FEHLER  $label: Port 22 nicht erreichbar (Timeout oder abgelehnt)"
+            fi
+          }
+          check "SSH_HOST"             "$SSH_HOST"
+          check "Origin 78.47.183.65"  "78.47.183.65"
+          check "Gegenprobe github.com" "github.com"
